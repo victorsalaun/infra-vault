@@ -1,0 +1,24 @@
+name: terraform
+on: [push, pull_request]
+jobs:
+  fmt:
+    name: terraform fmt
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Checkout'
+      uses: actions/checkout@master
+    - name: 'Terraform Format'
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 0.12.18
+        tf_actions_subcommand: 'fmt'
+  tfsec:
+    name: terraform tfsec
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Checkout'
+      uses: actions/checkout@master
+    - name: 'tfsec'
+      uses: victorsalaun/gh-actions/tfsec@master
+      with:
+        args: terraform/layers
